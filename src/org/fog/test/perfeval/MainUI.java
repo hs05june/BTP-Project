@@ -122,6 +122,7 @@ public class MainUI extends JFrame {
 	final static String[] edgeNumStr = new String[]{null,"1","2","3","4","5"};
 	final static String[] mobileNumStr = new String[]{null,"1","2","3","4","5"};
 	final static String[] strategyStr = new String[]{null,"All-in-Fog","All-in-Cloud","Simple"};
+	final static String[] planningStr = new String[]{null,"HEFT","CPOP"};
 	final static String[] columnNames = {"Job ID", "Task ID", "STATUS", "Data center ID", "VM ID", 
 			"Time","Start Time","Finish Time","Depth","Cost","Parents"};//表头元素
 	private static JComboBox inputTypeCb = new JComboBox(inputTypeStr);
@@ -130,6 +131,7 @@ public class MainUI extends JFrame {
 	private static JComboBox edgeNumCb = new JComboBox(edgeNumStr);
 	private static JComboBox mobileNumCb = new JComboBox(mobileNumStr);
 	private static JComboBox StrategyCb = new JComboBox(strategyStr);
+	private static JComboBox PlanningCb = new JComboBox(planningStr);
 	
 	private final static JButton stnBtn = new JButton("Start Simulation");
 	private final static JButton cmpBtn = new JButton("Compare");
@@ -289,14 +291,23 @@ public class MainUI extends JFrame {
 		g1.add(rdbtnEnergy);
 		g1.add(rdbtnCost);
 		
-		StrategyCb.setBounds(180, 39, 92, 21);
-		panel_2.add(StrategyCb);
+//		StrategyCb.setBounds(180, 39, 92, 21);
+//		panel_2.add(StrategyCb);
 		
-		JLabel lblStrategy = new JLabel("Offloading Strategys:");
-		lblStrategy.setForeground(Color.BLACK);
-		lblStrategy.setFont(new Font("Consolas", Font.PLAIN, 12));
-		lblStrategy.setBounds(10, 40, 147, 20);
-		panel_2.add(lblStrategy);
+		PlanningCb.setBounds(180, 39, 92, 21);
+		panel_2.add(PlanningCb);
+		
+//		JLabel lblStrategy = new JLabel("Offloading Strategys:");
+//		lblStrategy.setForeground(Color.BLACK);
+//		lblStrategy.setFont(new Font("Consolas", Font.PLAIN, 12));
+//		lblStrategy.setBounds(10, 40, 147, 20);
+//		panel_2.add(lblStrategy);
+		
+		JLabel lblPlanning = new JLabel("Planning Algorithms:");
+		lblPlanning.setForeground(Color.BLACK);
+		lblPlanning.setFont(new Font("Consolas", Font.PLAIN, 12));
+		lblPlanning.setBounds(10, 40, 147, 20);
+		panel_2.add(lblPlanning);
 		
 		cmpBtn.setFont(new Font("Consolas", Font.PLAIN, 12));
 		cmpBtn.setBounds(170, 245, 153, 45);
@@ -1103,11 +1114,27 @@ public class MainUI extends JFrame {
 	             */
 	            Parameters.SchedulingAlgorithm sch_method =Parameters.SchedulingAlgorithm.valueOf(scheduler_method);
 	            Parameters.Optimization opt_objective = Parameters.Optimization.valueOf(optimize_objective);
-	            Parameters.PlanningAlgorithm pln_method = Parameters.PlanningAlgorithm.CPOP;
+	            Parameters.PlanningAlgorithm pln_method = Parameters.PlanningAlgorithm.INVALID;
 	            ReplicaCatalog.FileSystem file_system = ReplicaCatalog.FileSystem.SHARED;
 	            /**
 	             * No overheads
 	             */
+	            if(PlanningCb.getSelectedItem() == null) {
+	            	pln_method = Parameters.PlanningAlgorithm.INVALID;
+	            	}
+	            else{
+	            	switch (PlanningCb.getSelectedItem().toString()) {
+	            	case "HEFT":
+	            		pln_method = Parameters.PlanningAlgorithm.HEFT;
+						break;
+	            	case "CPOP":
+	            		pln_method = Parameters.PlanningAlgorithm.CPOP;
+	            		break;
+					default:
+						pln_method = Parameters.PlanningAlgorithm.INVALID;
+						break;
+					}
+	            }
 	            OverheadParameters op = new OverheadParameters(0, null, null, null, null, 0);
 
 	            /**

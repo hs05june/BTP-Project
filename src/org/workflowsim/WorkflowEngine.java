@@ -568,8 +568,6 @@ public class WorkflowEngine extends SimEntity {
             			}
             		}
             		iterateNum++;
-            		System.out.println("After "+iterateNum+" iterations:");
-            		System.out.println("======alphabest_fitness:========"+GwoScheduling.alphabest_fitness);
             		updatebest.add(GwoScheduling.alphabest_fitness);
 //	              	printindicators(GwoScheduling.alphabest_fitness);
             		

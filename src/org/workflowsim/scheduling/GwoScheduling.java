@@ -208,8 +208,8 @@ public class GwoScheduling {
 //        pbest_schedule.removeAll(pbest_schedule);
 //	}
 	
-	public static int particleNum = 1500;//粒子数
-	public static int iterateNum = 300;//迭代次数
+	public static int particleNum = 10000;//粒子数
+	public static int iterateNum = 3000;//迭代次数
 	public static double c1 = 2.0;//学习因子c1
 	public static double c2 = 1.5;//学习因子c2
 	public static double w = 3;//惯性权重
