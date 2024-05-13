@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PSO>
+ <Number_of_Particles>10</Number_of_Particles>
+ <Number_of_Iterations>10000</Number_of_Iterations>
+ <Learning_Factor_c1>2</Learning_Factor_c1>
+ <Learning_Factor_c2>3</Learning_Factor_c2>
+ <Inertia_Weight>5</Inertia_Weight>
+ <Repeated_experiment>20</Repeated_experiment>
+</PSO>

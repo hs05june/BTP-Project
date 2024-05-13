@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GWO>
+ <Number_of_Particles>10</Number_of_Particles>
+ <Number_of_Iterations>10000</Number_of_Iterations>
+ <Learning_Factor_a>2</Learning_Factor_a>
+ <Repeated_experiment>5</Repeated_experiment>
+</GWO>
