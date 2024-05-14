@@ -114,7 +114,7 @@ import jxl.write.biff.RowsExceededException;
 
 @SuppressWarnings("serial")
 public class MainUI extends JFrame {
-	final static String[] algrithmStr = new String[]{"MINMIN","MAXMIN","FCFS","SJF","ROUNDROBIN","PSO","GA","GWO"};
+	final static String[] algrithmStr = new String[]{"MINMIN","MAXMIN","FCFS","SJF","ROUNDROBIN","PSO","GA","GWO","HEFT","CPOP"};
 	final static String[] objectiveStr = new String[]{"Time","Energy","Cost"};
 	final static String[] inputTypeStr = new String[]{"Montage","CyberShake","Epigenomics","Inspiral","Sipht"};
 	final static String[] nodeSizeStr = new String[]{};
@@ -122,7 +122,7 @@ public class MainUI extends JFrame {
 	final static String[] edgeNumStr = new String[]{null,"1","2","3","4","5"};
 	final static String[] mobileNumStr = new String[]{null,"1","2","3","4","5"};
 	final static String[] strategyStr = new String[]{null,"All-in-Fog","All-in-Cloud","Simple"};
-	final static String[] planningStr = new String[]{null,"HEFT","CPOP"};
+//	final static String[] planningStr = new String[]{null,"HEFT","CPOP"};
 	final static String[] columnNames = {"Job ID", "Task ID", "STATUS", "Data center ID", "VM ID", 
 			"Time","Start Time","Finish Time","Depth","Cost","Parents"};//表头元素
 	private static JComboBox inputTypeCb = new JComboBox(inputTypeStr);
@@ -131,7 +131,7 @@ public class MainUI extends JFrame {
 	private static JComboBox edgeNumCb = new JComboBox(edgeNumStr);
 	private static JComboBox mobileNumCb = new JComboBox(mobileNumStr);
 	private static JComboBox StrategyCb = new JComboBox(strategyStr);
-	private static JComboBox PlanningCb = new JComboBox(planningStr);
+//	private static JComboBox PlanningCb = new JComboBox(planningStr);
 	
 	private final static JButton stnBtn = new JButton("Start Simulation");
 	private final static JButton cmpBtn = new JButton("Compare");
@@ -176,6 +176,8 @@ public class MainUI extends JFrame {
 	private final JCheckBox chckbxGa = new JCheckBox("GA");
 	private final JCheckBox chckbxPso = new JCheckBox("PSO");
 	private final JCheckBox chckbxGwo = new JCheckBox("GWO");
+	private final JCheckBox chckbxHeft = new JCheckBox("HEFT");
+	private final JCheckBox chckbxCpop = new JCheckBox("CPOP");
 	static List<JCheckBox> CheckBoxList = new ArrayList<JCheckBox>();
 	private final JRadioButton rdbtnTime = new JRadioButton("Time",true);
 	private final JRadioButton rdbtnEnergy = new JRadioButton("Energy");
@@ -291,23 +293,23 @@ public class MainUI extends JFrame {
 		g1.add(rdbtnEnergy);
 		g1.add(rdbtnCost);
 		
-//		StrategyCb.setBounds(180, 39, 92, 21);
-//		panel_2.add(StrategyCb);
+		StrategyCb.setBounds(180, 39, 92, 21);
+		panel_2.add(StrategyCb);
 		
-		PlanningCb.setBounds(180, 39, 92, 21);
-		panel_2.add(PlanningCb);
+//		PlanningCb.setBounds(180, 39, 92, 21);
+//		panel_2.add(PlanningCb);
 		
-//		JLabel lblStrategy = new JLabel("Offloading Strategys:");
-//		lblStrategy.setForeground(Color.BLACK);
-//		lblStrategy.setFont(new Font("Consolas", Font.PLAIN, 12));
-//		lblStrategy.setBounds(10, 40, 147, 20);
-//		panel_2.add(lblStrategy);
+		JLabel lblStrategy = new JLabel("Offloading Strategys:");
+		lblStrategy.setForeground(Color.BLACK);
+		lblStrategy.setFont(new Font("Consolas", Font.PLAIN, 12));
+		lblStrategy.setBounds(10, 40, 147, 20);
+		panel_2.add(lblStrategy);
 		
-		JLabel lblPlanning = new JLabel("Planning Algorithms:");
-		lblPlanning.setForeground(Color.BLACK);
-		lblPlanning.setFont(new Font("Consolas", Font.PLAIN, 12));
-		lblPlanning.setBounds(10, 40, 147, 20);
-		panel_2.add(lblPlanning);
+//		JLabel lblPlanning = new JLabel("Planning Algorithms:");
+//		lblPlanning.setForeground(Color.BLACK);
+//		lblPlanning.setFont(new Font("Consolas", Font.PLAIN, 12));
+//		lblPlanning.setBounds(10, 40, 147, 20);
+//		panel_2.add(lblPlanning);
 		
 		cmpBtn.setFont(new Font("Consolas", Font.PLAIN, 12));
 		cmpBtn.setBounds(170, 245, 153, 45);
@@ -549,17 +551,29 @@ public class MainUI extends JFrame {
 		lblAlgorithmSelection.setBounds(10, 8, 298, 25);
 		panel_2.add(lblAlgorithmSelection);
 		
-		chckbxMinmin.setFont(new Font("Consolas", Font.PLAIN, 12));
-		chckbxMinmin.setBackground(Color.WHITE);
-		chckbxMinmin.setBounds(10, 91, 68, 23);
-		CheckBoxList.add(chckbxMinmin);
-		panel_2.add(chckbxMinmin);
+//		chckbxMinmin.setFont(new Font("Consolas", Font.PLAIN, 12));
+//		chckbxMinmin.setBackground(Color.WHITE);
+//		chckbxMinmin.setBounds(10, 91, 68, 23);
+//		CheckBoxList.add(chckbxMinmin);
+//		panel_2.add(chckbxMinmin);
+//		
+//		chckbxMaxmin.setFont(new Font("Consolas", Font.PLAIN, 12));
+//		chckbxMaxmin.setBackground(Color.WHITE);
+//		chckbxMaxmin.setBounds(82, 91, 75, 23);
+//		CheckBoxList.add(chckbxMaxmin);
+//		panel_2.add(chckbxMaxmin);
 		
-		chckbxMaxmin.setFont(new Font("Consolas", Font.PLAIN, 12));
-		chckbxMaxmin.setBackground(Color.WHITE);
-		chckbxMaxmin.setBounds(82, 91, 75, 23);
-		CheckBoxList.add(chckbxMaxmin);
-		panel_2.add(chckbxMaxmin);
+		chckbxHeft.setFont(new Font("Consolas", Font.PLAIN, 12));
+		chckbxHeft.setBackground(Color.WHITE);
+		chckbxHeft.setBounds(10, 91, 68, 23);
+		CheckBoxList.add(chckbxHeft);
+		panel_2.add(chckbxHeft);
+		
+		chckbxCpop.setFont(new Font("Consolas", Font.PLAIN, 12));
+		chckbxCpop.setBackground(Color.WHITE);
+		chckbxCpop.setBounds(82, 91, 75, 23);
+		CheckBoxList.add(chckbxCpop);
+		panel_2.add(chckbxCpop);
 		
 		chckbxFcfs.setFont(new Font("Consolas", Font.PLAIN, 12));
 		chckbxFcfs.setBackground(Color.WHITE);
@@ -762,9 +776,7 @@ public class MainUI extends JFrame {
 	            	outputs.clear();
 	            	record.clear();
 	            	lblTime.setText("");
-	            	if(GetAlgorithms().size() == 0)
-	            		showDialog("Please choose an Alogorithm", "error");
-	            	else if(GetAlgorithms().size() > 1)
+	            	if(GetAlgorithms().size() > 1)
 	            		showDialog("You chose more than one , please click the 'Compare' button", "error");
 	            	else{
 	            		for(JCheckBox cb : CheckBoxList){
@@ -1112,29 +1124,42 @@ public class MainUI extends JFrame {
 	             * algorithm should be INVALID such that the planner would not
 	             * override the result of the scheduler
 	             */
+	            Parameters.PlanningAlgorithm pln_method = Parameters.PlanningAlgorithm.INVALID;
+	            
+	            if(scheduler_method.equals("HEFT")) {
+	            	pln_method = Parameters.PlanningAlgorithm.HEFT;
+	            	scheduler_method = "FCFS";
+	            	System.out.println("I have entered");
+	            }
+	            else if(scheduler_method.equals("CPOP")) {
+	            	pln_method = Parameters.PlanningAlgorithm.CPOP;
+	            	scheduler_method = "FCFS";
+	            	System.out.println("I have entered 1");
+	            }
+	            
 	            Parameters.SchedulingAlgorithm sch_method =Parameters.SchedulingAlgorithm.valueOf(scheduler_method);
 	            Parameters.Optimization opt_objective = Parameters.Optimization.valueOf(optimize_objective);
-	            Parameters.PlanningAlgorithm pln_method = Parameters.PlanningAlgorithm.INVALID;
 	            ReplicaCatalog.FileSystem file_system = ReplicaCatalog.FileSystem.SHARED;
 	            /**
 	             * No overheads
 	             */
-	            if(PlanningCb.getSelectedItem() == null) {
-	            	pln_method = Parameters.PlanningAlgorithm.INVALID;
-	            	}
-	            else{
-	            	switch (PlanningCb.getSelectedItem().toString()) {
-	            	case "HEFT":
-	            		pln_method = Parameters.PlanningAlgorithm.HEFT;
-						break;
-	            	case "CPOP":
-	            		pln_method = Parameters.PlanningAlgorithm.CPOP;
-	            		break;
-					default:
-						pln_method = Parameters.PlanningAlgorithm.INVALID;
-						break;
-					}
-	            }
+//	            if(PlanningCb.getSelectedItem() == null) {
+//	            	pln_method = Parameters.PlanningAlgorithm.INVALID;
+//	            	}
+//	            else{
+//	            	switch (PlanningCb.getSelectedItem().toString()) {
+//	            	case "HEFT":
+//	            		pln_method = Parameters.PlanningAlgorithm.HEFT;
+//						break;
+//	            	case "CPOP":
+//	            		pln_method = Parameters.PlanningAlgorithm.CPOP;
+//	            		break;
+//					default:
+//						pln_method = Parameters.PlanningAlgorithm.INVALID;
+//						break;
+//					}
+//	            }
+	            
 	            OverheadParameters op = new OverheadParameters(0, null, null, null, null, 0);
 
 	            /**
