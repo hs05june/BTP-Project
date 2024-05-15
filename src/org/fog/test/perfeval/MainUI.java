@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
@@ -1129,12 +1130,12 @@ public class MainUI extends JFrame {
 	            if(scheduler_method.equals("HEFT")) {
 	            	pln_method = Parameters.PlanningAlgorithm.HEFT;
 	            	scheduler_method = "FCFS";
-	            	System.out.println("I have entered");
+//	            	System.out.println("I have entered");
 	            }
 	            else if(scheduler_method.equals("CPOP")) {
 	            	pln_method = Parameters.PlanningAlgorithm.CPOP;
 	            	scheduler_method = "FCFS";
-	            	System.out.println("I have entered 1");
+//	            	System.out.println("I have entered 1");
 	            }
 	            
 	            Parameters.SchedulingAlgorithm sch_method =Parameters.SchedulingAlgorithm.valueOf(scheduler_method);
@@ -1438,9 +1439,10 @@ public class MainUI extends JFrame {
 	        //create VMs
 	        CondorVM[] vm = new CondorVM[vms];
 	        for (int i = 0; i < vms; i++) {
-	            double ratio = 1.0;
+	        	Random random = new Random();
+	        	double ratio = 0.99 + random.nextDouble() * 0.01;
 	            int mips = devicelist.get(i).getTotalMips();
-	            vm[i] = new CondorVM(i, userId, mips * ratio, pesNumber, ram, bw, size, vmm, new CloudletSchedulerSpaceShared());
+	            vm[i] = new CondorVM(i, userId, ratio * mips, pesNumber, ram, (long) (bw * ratio), size, vmm, new CloudletSchedulerSpaceShared());
 	            list.add(vm[i]);
 	        }
 	        return list;
